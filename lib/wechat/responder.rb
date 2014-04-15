@@ -76,7 +76,8 @@ module Wechat
     end
 
     def create
-      request = Wechat::Message.from_hash(Hash.from_xml(request.body))
+      p = Hash.from_xml(request.body)
+      request = Wechat::Message.from_hash(p)
       response = self.class.responder_for(request) do |responder, *args|
         responder ||= self.class.responders(:fallback).first
 
