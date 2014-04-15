@@ -75,7 +75,8 @@ module Wechat
       render :text => params[:echostr]
     end
 
-    def create      
+    def create 
+      p = Hash.from_xml request.body     
       request = Wechat::Message.from_hash(p["xml"].symbolize_keys)
       response = self.class.responder_for(request) do |responder, *args|
         responder ||= self.class.responders(:fallback).first
